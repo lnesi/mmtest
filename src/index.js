@@ -1,8 +1,10 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+import firebase from 'firebase';
 
-ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
+const config = {
+    apiKey: "AIzaSyBCq1CI7KdShcpwC_y2zDjBlRFmEJOwdeo",
+    databaseURL: "https://mmtest-fc85e.firebaseio.com",
+    projectId: "mmtest-fc85e",
+};
+firebase.initializeApp(config);
+window.firebase=firebase;
+firebase.database().ref().on('value',snapshot=>console.log(snapshot))

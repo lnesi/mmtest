@@ -7,7 +7,7 @@ class Seats extends React.Component {
 		const seat = this.props.seats[key];
 		return (
 			<li key={key}>
-				<Seat id={key} {...seat} current={this.props.current} />
+				<Seat id={key} {...seat} canvasOnline={this.props.online} />
 			</li>
 		);
 	}
@@ -26,6 +26,6 @@ class Seats extends React.Component {
 	}
 }
 function mapStateToProps({ whiteboard }) {
-	return { seats: whiteboard.seats, currentUser: whiteboard.currentUser };
+	return whiteboard;
 }
 export default connect(mapStateToProps)(Seats);

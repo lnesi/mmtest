@@ -70,7 +70,7 @@ class Whiteboard extends React.Component {
 	}
 
 	onMouseDown({ clientX, clientY }) {
-		if (this.props.currentUser) {
+		if (this.props.online) {
 			this.setState({
 				drawing: true,
 				current: { x: clientX, y: clientY }
@@ -78,7 +78,7 @@ class Whiteboard extends React.Component {
 		}
 	}
 	onMouseUp({ clientX, clientY }) {
-		if (!this.state.drawing || !this.props.currentUser) return null;
+		if (!this.state.drawing || !this.props.online) return null;
 		this.setState({ drawing: false });
 		const { x, y } = this.state.current;
 		const { width, height } = this.canvas.current;

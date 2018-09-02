@@ -8,7 +8,10 @@ export function drawLine(id, x0, y0, x1, y1, color) {
 			.set({ x0, y0, x1, y1 });
 	}
 
-	return { type: WHITEBOARD_DRAW };
+	return {
+		type: WHITEBOARD_DRAW,
+		payload: "whiteboard/seats/" + id + "/lines/" + timestamp
+	};
 }
 
 export function seat(id) {

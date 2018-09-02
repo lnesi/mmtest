@@ -16,7 +16,7 @@ class Seat extends React.Component {
 	}
 
 	renderControls() {
-		if (!this.props.online && !this.props.current) {
+		if (!this.props.online && !this.props.canvasOnline ) {
 			return (
 				<div>
 					<button onClick={this.onClickSeat.bind(this)}>Seat</button>

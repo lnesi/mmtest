@@ -1,6 +1,6 @@
-import {combineReducers} from 'redux';
-import whiteboardReducer from './whiteboard';
+import { combineReducers } from "redux";
+import whiteboardReducer from "./whiteboard";
 
 export default combineReducers({
-	whiteboard:whiteboardReducer
+	whiteboard: whiteboardReducer
 });

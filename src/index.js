@@ -14,13 +14,13 @@ const config = {
 	databaseURL: "https://mmtest-fc85e.firebaseio.com",
 	projectId: "mmtest-fc85e"
 };
+
 firebase.initializeApp(config);
 window.firebase = firebase;
 const db = firebase.database();
-window.db=db;
+window.db = db;
 
 db.ref("whiteboard/").on("value", snapshot => {
-	
 	store.dispatch({ type: WHITEBOARD_UPDATE, payload: snapshot.val() });
 });
 

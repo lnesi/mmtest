@@ -1,7 +1,7 @@
 import React from "react";
 
 import Whiteboard from "./Whiteboard";
-import Seats from './Seats';
+import Seats from "./Seats";
 
 class App extends React.Component {
 	render() {
@@ -10,7 +10,6 @@ class App extends React.Component {
 				<h1>Media Molecule Test</h1>
 				<Seats />
 				<Whiteboard />
-
 			</div>
 		);
 	}

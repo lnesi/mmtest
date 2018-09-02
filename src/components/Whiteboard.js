@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import * as actions from "../actions";
 
 class Whiteboard extends React.Component {
-	static drawLine(context, w, h, { x0, y0, x1, y1, color }) {
+	static drawLine(context, w, h, color, { x0, y0, x1, y1 }) {
 		context.beginPath();
 		context.moveTo(x0 * w, y0 * h);
 		context.lineTo(x1 * w, y1 * h);
@@ -14,15 +14,25 @@ class Whiteboard extends React.Component {
 	}
 
 	static getDerivedStateFromProps(props, state) {
-		const lines = props.whiteboard;
-		if (lines && state.canvas.current) {
+		if (state.canvas.current) {
 			const context = state.canvas.current.getContext("2d");
 			const { width, height } = state.canvas.current;
 			context.clearRect(0, 0, width, height);
-			lines.forEach(line => {
-				Whiteboard.drawLine(context, width, height, line);
+			props.seats.forEach(seat => {
+				if (seat.lines) {
+					Object.keys(seat.lines).forEach(key => {
+						Whiteboard.drawLine(
+							context,
+							width,
+							height,
+							seat.color,
+							seat.lines[key]
+						);
+					});
+				}
 			});
 		}
+
 		return null;
 	}
 
@@ -60,35 +70,37 @@ class Whiteboard extends React.Component {
 	}
 
 	onMouseDown({ clientX, clientY }) {
-		this.setState({
-			drawing: true,
-			current: { x: clientX, y: clientY }
-		});
+		if (this.props.currentUser) {
+			this.setState({
+				drawing: true,
+				current: { x: clientX, y: clientY }
+			});
+		}
 	}
 	onMouseUp({ clientX, clientY }) {
-		if (!this.state.drawing) return null;
+		if (!this.state.drawing || !this.props.currentUser) return null;
 		this.setState({ drawing: false });
-		const { color, current: { x, y } } = this.state;
+		const { x, y } = this.state.current;
 		const { width, height } = this.canvas.current;
 		this.props.drawLine(
+			this.props.currentUser,
 			x / width,
 			y / height,
 			clientX / width,
-			clientY / height,
-			color
+			clientY / height
 		);
 	}
 
 	onMouseMove({ clientX, clientY }) {
 		if (!this.state.drawing) return null;
-		const { color, current: { x, y } } = this.state;
+		const { x, y } = this.state.current;
 		const { width, height } = this.canvas.current;
 		this.props.drawLine(
+			this.props.currentUser,
 			x / width,
 			y / height,
 			clientX / width,
-			clientY / height,
-			color
+			clientY / height
 		);
 		this.setState({
 			current: { x: clientX, y: clientY }
@@ -111,6 +123,6 @@ class Whiteboard extends React.Component {
 }
 
 function mapStateToProps({ whiteboard }) {
-	return { whiteboard };
+	return { ...whiteboard };
 }
 export default connect(mapStateToProps, actions)(Whiteboard);

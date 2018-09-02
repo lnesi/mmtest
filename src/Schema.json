@@ -1,0 +1,34 @@
+{
+	"seats": [
+		{
+			"userName": "user_01",
+			"color": "black",
+			"lines": [],
+			"online": false
+		},
+		{
+			"userName": "user_02",
+			"color": "red",
+			"lines": [],
+			"online": false
+		},
+		{
+			"userName": "user_03",
+			"color": "green",
+			"lines": [],
+			"online": false
+		},
+		{
+			"userName": "user_04",
+			"color": "blue",
+			"lines": [],
+			"online": false
+		},
+		{
+			"userName": "user_05",
+			"color": "purple",
+			"lines": [],
+			"online": false
+		}
+	]
+}

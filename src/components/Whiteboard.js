@@ -3,14 +3,39 @@ import { connect } from "react-redux";
 import * as actions from "../actions";
 
 class Whiteboard extends React.Component {
+	static drawLine(context, w, h, { x0, y0, x1, y1, color }) {
+		context.beginPath();
+		context.moveTo(x0 * w, y0 * h);
+		context.lineTo(x1 * w, y1 * h);
+		context.strokeStyle = color;
+		context.lineWidth = 2;
+		context.stroke();
+		context.closePath();
+	}
+
+	static getDerivedStateFromProps(props, state) {
+		const lines = props.whiteboard;
+		if (lines && state.canvas.current) {
+			const context = state.canvas.current.getContext("2d");
+			const { width, height } = state.canvas.current;
+			context.clearRect(0, 0, width, height);
+			lines.forEach(line => {
+				Whiteboard.drawLine(context, width, height, line);
+			});
+		}
+		return null;
+	}
+
 	constructor(props) {
 		super(props);
 		this.state = {
 			drawing: false,
 			current: { x: 0, y: 0 },
-			color: "black"
+			color: "black",
+			canvas: null
 		};
 		this.canvas = React.createRef();
+		this.state.canvas = this.canvas;
 		this.onMouseDown = this.onMouseDown.bind(this);
 		this.onMouseUp = this.onMouseUp.bind(this);
 		this.onMouseMove = this.onMouseMove.bind(this);
@@ -43,27 +68,31 @@ class Whiteboard extends React.Component {
 	onMouseUp({ clientX, clientY }) {
 		if (!this.state.drawing) return null;
 		this.setState({ drawing: false });
-		this.drawLine(clientX, clientY, true);
+		const { color, current: { x, y } } = this.state;
+		const { width, height } = this.canvas.current;
+		this.props.drawLine(
+			x / width,
+			y / height,
+			clientX / width,
+			clientY / height,
+			color
+		);
 	}
 
 	onMouseMove({ clientX, clientY }) {
 		if (!this.state.drawing) return null;
-
-		this.drawLine(clientX, clientY, true);
+		const { color, current: { x, y } } = this.state;
+		const { width, height } = this.canvas.current;
+		this.props.drawLine(
+			x / width,
+			y / height,
+			clientX / width,
+			clientY / height,
+			color
+		);
 		this.setState({
 			current: { x: clientX, y: clientY }
 		});
-	}
-
-	drawLine(x1, y1, dispatch) {
-		const context = this.canvas.current.getContext("2d");
-		context.beginPath();
-		context.moveTo(this.state.current.x, this.state.current.y);
-		context.lineTo(x1, y1);
-		context.strokeStyle = this.state.color;
-		context.lineWidth = 2;
-		context.stroke();
-		context.closePath();
 	}
 
 	onResize(event) {

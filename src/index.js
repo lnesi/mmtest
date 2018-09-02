@@ -17,7 +17,7 @@ const config = {
 firebase.initializeApp(config);
 window.firebase = firebase;
 const db = firebase.database();
-
+window.db=db;
 db.ref("whiteboard/").on("value", snapshot => {
 	store.dispatch({ type: WHITEBOARD_UPDATE, payload: snapshot });
 });

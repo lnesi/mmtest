@@ -40,4 +40,11 @@ npm run test
 ```
 
 #### Results
+```
+  App Component
+    ✓ has Seats box (8ms)
+    ✓ has Whiteboard
 
+  Whiteboard Component
+    ✓ has canvas (10ms)
+```

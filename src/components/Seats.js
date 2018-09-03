@@ -1,13 +1,24 @@
 import React from "react";
 import { connect } from "react-redux";
+import * as actions from "../actions";
 import Seat from "./Seat";
+import Controls from "./Controls";
 
 class Seats extends React.Component {
+	onClickSeat(id) {
+		this.props.seat(id);
+	}
+
 	renderSeat(key) {
 		const seat = this.props.seats[key];
 		return (
 			<li key={key}>
-				<Seat id={key} {...seat} canvasOnline={this.props.online} />
+				<Seat
+					id={key}
+					{...seat}
+					onClickSeat={this.onClickSeat.bind(this)}
+					canvasOnline={this.props.online}
+				/>
 			</li>
 		);
 	}
@@ -21,6 +32,7 @@ class Seats extends React.Component {
 						return this.renderSeat(index);
 					})}
 				</ul>
+				<Controls {...this.props} />
 			</div>
 		);
 	}
@@ -28,4 +40,4 @@ class Seats extends React.Component {
 function mapStateToProps({ whiteboard }) {
 	return whiteboard;
 }
-export default connect(mapStateToProps)(Seats);
+export default connect(mapStateToProps, actions)(Seats);

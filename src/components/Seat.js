@@ -1,25 +1,15 @@
 import React from "react";
-import { connect } from "react-redux";
-import * as actions from "../actions";
 
 class Seat extends React.Component {
-	onClickLeave() {
-		this.props.leave(this.props.id);
-	}
-
-	onClickSeat() {
-		this.props.seat(this.props.id);
-	}
-
-	onClickClear() {
-		this.props.clear(this.props.id);
-	}
-
 	renderControls() {
-		if (!this.props.online && !this.props.canvasOnline ) {
+		if (!this.props.online && !this.props.canvasOnline) {
 			return (
 				<div>
-					<button onClick={this.onClickSeat.bind(this)}>Seat</button>
+					<button
+						onClick={() => this.props.onClickSeat(this.props.id)}
+					>
+						Seat In
+					</button>
 				</div>
 			);
 		}
@@ -43,4 +33,4 @@ class Seat extends React.Component {
 	}
 }
 
-export default connect(null, actions)(Seat);
+export default Seat;

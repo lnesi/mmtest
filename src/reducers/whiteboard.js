@@ -14,7 +14,7 @@ export default function(
 		case WHITEBOARD_SEAT:
 			return { ...state, currentUser: action.payload, online: true };
 		case WHITEBOARD_LEAVE:
-			return { ...state, currentUser: null, online: true };
+			return { ...state, currentUser: null, online: false };
 		default:
 			return state;
 	}

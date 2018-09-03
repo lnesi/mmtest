@@ -1,8 +1,14 @@
-import { WHITEBOARD_DRAW, WHITEBOARD_SEAT, WHITEBOARD_LEAVE } from "./types";
+import {
+	WHITEBOARD_DRAW,
+	WHITEBOARD_SEAT,
+	WHITEBOARD_LEAVE,
+	WHITEBOARD_CLEAR
+} from "./types";
 
 export function drawLine(id, x0, y0, x1, y1, color) {
 	const timestamp = new Date().getTime();
-	if (id) {
+	console.log("drawline", id);
+	if (id !== undefined) {
 		window.db
 			.ref("whiteboard/seats/" + id + "/lines/" + timestamp)
 			.set({ x0, y0, x1, y1 });
@@ -26,4 +32,5 @@ export function leave(id) {
 
 export function clear(id) {
 	window.db.ref("whiteboard/seats/" + id).update({ lines: [] });
+	return { type: WHITEBOARD_CLEAR };
 }

@@ -2,7 +2,7 @@
 	"seats": [
 		{
 			"userName": "user_01",
-			"color": "black",
+			"color": "gold",
 			"lines": [],
 			"online": false
 		},
@@ -26,7 +26,7 @@
 		},
 		{
 			"userName": "user_05",
-			"color": "purple",
+			"color": "orange",
 			"lines": [],
 			"online": false
 		}

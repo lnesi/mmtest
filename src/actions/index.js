@@ -7,7 +7,6 @@ import {
 
 export function drawLine(id, x0, y0, x1, y1, color) {
 	const timestamp = new Date().getTime();
-	console.log("drawline", id);
 	if (id !== undefined) {
 		window.db
 			.ref("whiteboard/seats/" + id + "/lines/" + timestamp)

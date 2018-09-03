@@ -8,6 +8,7 @@ import firebase from "firebase";
 import { WHITEBOARD_UPDATE } from "./actions/types";
 
 import "./index.css";
+import schema from './Schema.json';
 
 const config = {
 	apiKey: "AIzaSyBCq1CI7KdShcpwC_y2zDjBlRFmEJOwdeo",
@@ -23,6 +24,10 @@ window.db = db;
 db.ref("whiteboard/").on("value", snapshot => {
 	store.dispatch({ type: WHITEBOARD_UPDATE, payload: snapshot.val() });
 });
+
+window.resetApp=function(){
+    db.ref("whiteboard/").set(schema);
+};
 
 ReactDOM.render(
 	<Provider store={store}>

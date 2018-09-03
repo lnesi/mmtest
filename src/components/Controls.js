@@ -15,16 +15,24 @@ class Controls extends React.Component {
 		if (this.props.online) {
 			return (
 				<div className="controls">
-					<button onClick={this.onClickLeave.bind(this)}>
+					<button
+						className="constrols__btn-leave"
+						onClick={this.onClickLeave.bind(this)}
+					>
 						Leave Seat
 					</button>
-					<button onClick={this.onClickClear.bind(this)}>
+					<button
+						className="constrols__btn-clear"
+						onClick={this.onClickClear.bind(this)}
+					>
 						Clear
 					</button>
 				</div>
 			);
+		}else{
+			return (<div className="controls"/>);
 		}
-		return "";
+		
 	}
 }
 

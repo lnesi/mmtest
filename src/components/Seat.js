@@ -5,7 +5,7 @@ class Seat extends React.Component {
 		if (!this.props.online && !this.props.canvasOnline) {
 			return (
 				<div>
-					<button
+					<button className="seat__btn-seat"
 						onClick={() => this.props.onClickSeat(this.props.id)}
 					>
 						Seat In
@@ -26,7 +26,6 @@ class Seat extends React.Component {
 					({this.props.online ? "online" : "available"})
 				</sup>
 				<br />
-
 				{this.renderControls()}
 			</div>
 		);

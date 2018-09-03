@@ -46,5 +46,22 @@ npm run test
     ✓ has Whiteboard
 
   Whiteboard Component
+    ✓ renders container (8ms)
     ✓ has canvas (10ms)
+
+  Controls Component
+    ✓ renders container (2ms)
+    ✓ has leave button (2ms)
+    ✓ has clear button (1ms)
+
+  Seat Component
+    ✓ renders container (2ms)
+    ✓ has btn seat (2ms)
+    ✓ has online status (1ms)
+    ✓ has online status has offline (1ms)
+
+  Seats Component
+    ✓ renders container (9ms)
+    ✓ renders list (2ms)
+
 ```

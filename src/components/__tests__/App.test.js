@@ -12,6 +12,7 @@ describe("App Component", () => {
 	beforeEach(()=>{
 		component = shallow(<App />);
 	});
+	
 	it("has Seats box", () => {
 		expect(component.find(Seats).length).toEqual(1);
 	});

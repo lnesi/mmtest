@@ -10,6 +10,9 @@ describe("Whiteboard Component", () => {
 	beforeEach(()=>{
 		component = mount(<Whiteboard store={store}/>);
 	});
+    it("renders container",()=>{
+        expect(component.find(".whiteboard").length).toEqual(1);
+    });
 	it("has canvas", () => {
 		expect(component.find(".whiteboard__canvas").length).toEqual(1);
 	});
